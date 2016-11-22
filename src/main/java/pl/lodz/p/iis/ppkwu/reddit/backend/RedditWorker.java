@@ -3,7 +3,6 @@ package pl.lodz.p.iis.ppkwu.reddit.backend;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.Executor;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.Callback;
@@ -14,8 +13,6 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
-import pl.lodz.p.iis.ppkwu.reddit.backend.data.PageImpl;
-import pl.lodz.p.iis.ppkwu.reddit.backend.data.ResultImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.CallbackBinder;
