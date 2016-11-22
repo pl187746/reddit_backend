@@ -15,6 +15,10 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.PageImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.ResultImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.SubredditImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
 
 public class RedditImpl implements Reddit {
 

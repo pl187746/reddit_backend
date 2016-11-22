@@ -1,4 +1,4 @@
-package pl.lodz.p.iis.ppkwu.reddit.backend;
+package pl.lodz.p.iis.ppkwu.reddit.backend.data;
 
 import java.util.List;
 
