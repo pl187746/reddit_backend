@@ -28,10 +28,7 @@ public class RedditWorker {
 	}
 
 	public void loadCategoriesList(Callback<List<Category>> callback) throws NullPointerException {
-		Result<List<Category>> result = new ResultBuilder<List<Category>>()
-				.withContent(FixedCategories.getList())
-				.build();
-		runCallback(callback, result);
+		replyWithContent(callback, FixedCategories.getList());
 	}
 
 	public void loadSubredditNews(Subreddit subreddit, Category category, Callback<Page<News>> callback) {
@@ -54,10 +51,7 @@ public class RedditWorker {
 			URL url = callUrl.call();
 			loadNewsFromUrl(url, callback);
 		} catch (Exception e) {
-			Result<Page<News>> result = new ResultBuilder<Page<News>>()
-				.withStatus(ResultStatus.CONNECTION_ERROR)
-				.build();
-			runCallback(callback, result);
+			replyWithErrorStatus(callback, ResultStatus.CONNECTION_ERROR);
 		}
 	}
 
@@ -67,11 +61,16 @@ public class RedditWorker {
 
 	private <C> void fakeEmptyPage(Callback<Page<C>> callback) {
 		Page<C> page = new PageBuilder<C>().build();
-		fakeResult(callback, page);
+		replyWithContent(callback, page);
 	}
 
-	private <R> void fakeResult(Callback<R> callback, R content) {
+	private <R> void replyWithContent(Callback<R> callback, R content) {
 		Result<R> result = new ResultBuilder<R>().withContent(content).build();
+		runCallback(callback, result);
+	}
+
+	private <R> void replyWithErrorStatus(Callback<R> callback, ResultStatus errorStatus) {
+		Result<R> result = new ResultBuilder<R>().withStatus(errorStatus).build();
 		runCallback(callback, result);
 	}
 
