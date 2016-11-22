@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.Optional;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
-import pl.lodz.p.iis.ppkwu.reddit.api.User;
 
 public class NewsImpl implements News {
 
@@ -20,19 +19,16 @@ public class NewsImpl implements News {
 
 	@Override
 	public String title() {
-
 		return title;
 	}
 
 	@Override
-	public User author() {
-
+	public UserImpl author() {
 		return author;
 	}
 
 	@Override
 	public Optional<URL> thumbnailUrl() {
-
 		return thumbnailUrl;
 	}
 

@@ -28,8 +28,7 @@ public class RedditImpl implements Reddit {
 	@Override
 	public void loadCategoriesList(Callback<List<Category>> callback) throws NullPointerException {
 		Objects.requireNonNull(callback, "callback");
-		// TODO Auto-generated method stub
-
+		fakeEmptyList(callback);
 	}
 
 	@Override
@@ -38,24 +37,21 @@ public class RedditImpl implements Reddit {
 		Objects.requireNonNull(subreddit, "subreddit");
 		Objects.requireNonNull(category, "category");
 		Objects.requireNonNull(callback, "callback");
-		// TODO Auto-generated method stub
-
+		fakeEmptyPage(callback);
 	}
 
 	@Override
 	public void loadUserNews(User user, Callback<Page<News>> callback) throws NullPointerException {
 		Objects.requireNonNull(user, "user");
 		Objects.requireNonNull(callback, "callback");
-		// TODO Auto-generated method stub
-
+		fakeEmptyPage(callback);
 	}
 
 	@Override
 	public void loadNewsByKeywords(List<String> keywords, Callback<Page<News>> callback) throws NullPointerException {
 		Objects.requireNonNull(keywords, "keywords");
 		Objects.requireNonNull(callback, "callback");
-		// TODO Auto-generated method stub
-
+		fakeEmptyPage(callback);
 	}
 
 	@Override
@@ -70,9 +66,18 @@ public class RedditImpl implements Reddit {
 		return new SubredditImpl(name);
 	}
 	
-	private void fakeEmptyPage(Callback<Page<News>> callback) {
-		Page<News> page = new PageImpl<>(Collections.EMPTY_LIST);
-		Result<Page<News>> result = new ResultImpl<>(ResultStatus.SUCCEEDED, Optional.of(page));
+	private <C> void fakeEmptyPage(Callback<Page<C>> callback) {
+		Page<C> page = new PageImpl<>(Collections.emptyList());
+		fakeResult(callback, page);
+	}
+	
+	private <C> void fakeEmptyList(Callback<List<C>> callback) {
+		List<C> list = Collections.emptyList();
+		fakeResult(callback, list);
+	}
+	
+	private <R> void fakeResult(Callback<R> callback, R content) {
+		Result<R> result = new ResultImpl<>(ResultStatus.SUCCEEDED, Optional.of(content));
 		callbackExecutor.execute(() -> { callback.finished(result); });
 	}
 

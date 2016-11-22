@@ -8,12 +8,10 @@ public class CategoryImpl implements Category {
 
 	public CategoryImpl(String name) {
 		this.name = name;
-
 	}
 
 	@Override
 	public String name() {
-
 		return name;
 	}
 
