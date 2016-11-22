@@ -14,7 +14,6 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
-import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.CallbackBinder;
 
@@ -56,12 +55,9 @@ public class RedditWorker {
 	}
 
 	public void loadNewsFromUrl(URL url, Callback<Page<News>> callback) {
-		fakeEmptyPage(callback);
-	}
-
-	private <C> void fakeEmptyPage(Callback<Page<C>> callback) {
-		Page<C> page = new PageBuilder<C>().build();
-		replyWithContent(callback, page);
+		NewsLoader newsLoader = new NewsLoader(url);
+		Result<Page<News>> result = newsLoader.loadNews();
+		runCallback(callback, result);
 	}
 
 	private <R> void replyWithContent(Callback<R> callback, R content) {
