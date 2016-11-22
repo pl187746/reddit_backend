@@ -26,12 +26,12 @@ public class RedditBuilderImpl implements RedditBuilder, Builder<RedditImpl> {
 	}
 
 	@Override
-	public RedditBuilder withCallbackExecutor(Executor callbackExecutor) {
+	public RedditBuilderImpl withCallbackExecutor(Executor callbackExecutor) {
 		this.callbackExecutor = callbackExecutor;
 		return this;
 	}
 
-	public RedditBuilder withWorkerExecutor(Executor workerExecutor) {
+	public RedditBuilderImpl withWorkerExecutor(Executor workerExecutor) {
 		this.workerExecutor = workerExecutor;
 		return this;
 	}
