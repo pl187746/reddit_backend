@@ -1,6 +1,5 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -26,7 +25,10 @@ public class RedditWorker {
 	}
 
 	public void loadCategoriesList(Callback<List<Category>> callback) throws NullPointerException {
-		fakeEmptyList(callback);
+		Result<List<Category>> result = new ResultBuilder<List<Category>>()
+				.withContent(FixedCategories.getList())
+				.build();
+		runCallback(callback, result);
 	}
 
 	public void loadSubredditNews(Subreddit subreddit, Category category, Callback<Page<News>> callback) {
@@ -45,12 +47,7 @@ public class RedditWorker {
 		Page<C> page = new PageBuilder<C>().build();
 		fakeResult(callback, page);
 	}
-	
-	private <C> void fakeEmptyList(Callback<List<C>> callback) {
-		List<C> list = Collections.emptyList();
-		fakeResult(callback, list);
-	}
-	
+
 	private <R> void fakeResult(Callback<R> callback, R content) {
 		Result<R> result = new ResultBuilder<R>().withContent(content).build();
 		runCallback(callback, result);
