@@ -14,11 +14,17 @@ public class ResultBuilder<R> implements Builder<ResultImpl<R>> {
 
 	public ResultBuilder<R> withStatus(ResultStatus status) {
 		this.resultStatus = Objects.requireNonNull(status);
+		if(!ResultStatus.SUCCEEDED.equals(status)) {
+			this.content = Optional.empty();
+		}
 		return this;
 	}
 
 	public ResultBuilder<R> withContent(Optional<R> content) {
 		this.content = Objects.requireNonNull(content);
+		if(content.isPresent()) {
+			this.resultStatus = ResultStatus.SUCCEEDED;
+		}
 		return this;
 	}
 
