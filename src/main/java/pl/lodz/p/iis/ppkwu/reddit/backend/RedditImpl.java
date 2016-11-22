@@ -19,6 +19,7 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.data.PageImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.ResultImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.SubredditImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.utils.CallbackBinder;
 
 public class RedditImpl implements Reddit {
 
@@ -82,7 +83,11 @@ public class RedditImpl implements Reddit {
 	
 	private <R> void fakeResult(Callback<R> callback, R content) {
 		Result<R> result = new ResultImpl<>(ResultStatus.SUCCEEDED, Optional.of(content));
-		callbackExecutor.execute(() -> { callback.finished(result); });
+		runCallback(callback, result);
 	}
 
+	private <R> void runCallback(Callback<R> callback, Result<R> result) {
+		CallbackBinder<R> binding = new CallbackBinder<>(callback, result);
+		callbackExecutor.execute(binding);
+	}
 }

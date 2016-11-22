@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.utils;
 
+import java.util.Objects;
+
 import pl.lodz.p.iis.ppkwu.reddit.api.Callback;
 import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 
@@ -9,9 +11,8 @@ public class CallbackBinder<R> implements Runnable {
 	private final Result<R> result;
 
 	public CallbackBinder(Callback<R> callback, Result<R> result) {
-		super();
-		this.callback = callback;
-		this.result = result;
+		this.callback = Objects.requireNonNull(callback, "callback");
+		this.result = Objects.requireNonNull(result, "reult");
 	}
 
 	@Override
