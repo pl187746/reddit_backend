@@ -16,6 +16,8 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.PageImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.ResultImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.CallbackBinder;
 
 public class RedditWorker {
@@ -44,7 +46,7 @@ public class RedditWorker {
 	}
 
 	private <C> void fakeEmptyPage(Callback<Page<C>> callback) {
-		Page<C> page = new PageImpl<>(Collections.emptyList());
+		Page<C> page = new PageBuilder<C>().build();
 		fakeResult(callback, page);
 	}
 	
@@ -54,7 +56,7 @@ public class RedditWorker {
 	}
 	
 	private <R> void fakeResult(Callback<R> callback, R content) {
-		Result<R> result = new ResultImpl<>(ResultStatus.SUCCEEDED, Optional.of(content));
+		Result<R> result = new ResultBuilder<R>().withStatus(ResultStatus.SUCCEEDED).withContent(content).build();
 		runCallback(callback, result);
 	}
 
