@@ -19,6 +19,8 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.data.PageImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.ResultImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.SubredditImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.SubredditBuilder;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.UserBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.CallbackBinder;
 
 public class RedditImpl implements Reddit {
@@ -62,13 +64,13 @@ public class RedditImpl implements Reddit {
 	@Override
 	public UserImpl userWithLogin(String login) {
 		Objects.requireNonNull(login, "login");
-		return new UserImpl(login);
+		return new UserBuilder().withLogin(login).build();
 	}
 
 	@Override
 	public SubredditImpl subredditWithName(String name) {
 		Objects.requireNonNull(name, "name");
-		return new SubredditImpl(name);
+		return new SubredditBuilder().withTittle(name).build();
 	}
 	
 	private <C> void fakeEmptyPage(Callback<Page<C>> callback) {
