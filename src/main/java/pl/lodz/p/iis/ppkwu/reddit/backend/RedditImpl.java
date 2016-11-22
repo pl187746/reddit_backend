@@ -46,15 +46,13 @@ public class RedditImpl implements Reddit {
 	}
 
 	@Override
-	public User userWithLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserImpl userWithLogin(String login) {
+		return new UserImpl(login);
 	}
 
 	@Override
-	public Subreddit subredditWithName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public SubredditImpl subredditWithName(String name) {
+		return new SubredditImpl(name);
 	}
 
 }
