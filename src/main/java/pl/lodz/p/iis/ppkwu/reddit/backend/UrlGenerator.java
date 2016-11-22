@@ -43,8 +43,7 @@ public class UrlGenerator {
 	}
 
 	public static URL userNewsUrl(User user) throws MalformedURLException {
-		URL userUrl = new URL(usersUrl, user.login());
-		return new URL(userUrl, userSubmittedUrlSuffix);
+		return new URL(usersUrl, user.login() + userSubmittedUrlSuffix);
 	}
 
 	public static URL newsByKeywordsUrl(List<String> keywords) throws MalformedURLException {
