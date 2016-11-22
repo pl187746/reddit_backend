@@ -10,7 +10,6 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
 import pl.lodz.p.iis.ppkwu.reddit.api.Page;
 import pl.lodz.p.iis.ppkwu.reddit.api.Result;
-import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
@@ -53,7 +52,7 @@ public class RedditWorker {
 	}
 	
 	private <R> void fakeResult(Callback<R> callback, R content) {
-		Result<R> result = new ResultBuilder<R>().withStatus(ResultStatus.SUCCEEDED).withContent(content).build();
+		Result<R> result = new ResultBuilder<R>().withContent(content).build();
 		runCallback(callback, result);
 	}
 
