@@ -1,8 +1,5 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -12,9 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.lodz.p.iis.ppkwu.reddit.api.Result;
-import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.ResultTest;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.SameThreadExecutor;
 
 public class RedditTest {
@@ -40,13 +36,13 @@ public class RedditTest {
 
 	@Test
 	public void rezultatPobieraniaListyKategoriiJestSpojny() {
-		reddit.loadCategoriesList(this::rezultatJestSpojny);
+		reddit.loadCategoriesList(ResultTest::rezultatJestSpojny);
 	}
 
 	@Test
 	public void rezultatPobieraniaWpisowUzytkownikaJestSpojny() {
 		User user = reddit.userWithLogin("qwerty");
-		reddit.loadUserNews(user, this::rezultatJestSpojny);
+		reddit.loadUserNews(user, ResultTest::rezultatJestSpojny);
 	}
 
 	@Test
@@ -54,19 +50,12 @@ public class RedditTest {
 		List<String> keywords = new ArrayList<>();
 		keywords.add("qwerty");
 		keywords.add("uiop");
-		reddit.loadNewsByKeywords(keywords, this::rezultatJestSpojny);
+		reddit.loadNewsByKeywords(keywords, ResultTest::rezultatJestSpojny);
 	}
 
 	@Test
 	public void rezultatPobieraniaWpisowPoPustejLiscieSlowKluczowychJestSpojny() {
-		reddit.loadNewsByKeywords(Collections.emptyList(), this::rezultatJestSpojny);
+		reddit.loadNewsByKeywords(Collections.emptyList(), ResultTest::rezultatJestSpojny);
 	}
 
-	private <R> void rezultatJestSpojny(Result<R> result) {
-		assertNotNull(result);
-		assertNotNull(result.status());
-		assertNotNull(result.content());
-		assertThat(result.succeeded(), is(ResultStatus.SUCCEEDED.equals(result.status())));
-		assertThat(result.content().isPresent(), is(result.succeeded()));
-	}
 }
