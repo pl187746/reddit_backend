@@ -5,6 +5,8 @@ import static org.junit.Assert.assertThat;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -24,6 +26,13 @@ public class UrlGeneratorTest {
 	public void uzytkownik() throws MalformedURLException {
 		URL url = UrlGenerator.userNewsUrl(new UserImpl("qwerty"));
 		assertThat(url, equalTo(new URL(UrlGenerator.baseUrl(), "/user/qwerty/submitted")));
+	}
+
+	@Test
+	public void slowaKluczowe() throws MalformedURLException {
+		List<String> keywords = Arrays.asList("qwerty", "uiop");
+		URL url = UrlGenerator.newsByKeywordsUrl(keywords);
+		assertThat(url, equalTo(new URL(UrlGenerator.baseUrl(), "/search?q=qwerty+uiop")));
 	}
 
 }
