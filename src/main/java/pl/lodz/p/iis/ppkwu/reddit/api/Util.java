@@ -9,8 +9,7 @@ public class Util {
 	 * @return Nową instancję obiektu implementującego RedditBuilder
 	 */
 	public static RedditBuilder redditBuilder() {
-		//return new pl.lodz.p.iis.ppkwu.reddit.team42.backend.RedditBuilderImpl();
-		throw new RuntimeException("Brak implementacji Util.redditBuilder()");
+		return new pl.lodz.p.iis.ppkwu.reddit.backend.RedditBuilderImpl();
 	}
 
 	/**
