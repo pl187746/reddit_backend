@@ -1,5 +1,6 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.Reddit;
@@ -16,6 +17,7 @@ public class RedditBuilderImpl implements RedditBuilder {
 
 	@Override
 	public RedditBuilder withCallbackExecutor(Executor callbackExecutor) {
+		Objects.requireNonNull(callbackExecutor, "callbackExecutor");
 		this.callbackExecutor = callbackExecutor;
 		return this;
 	}
