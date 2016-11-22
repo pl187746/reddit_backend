@@ -9,7 +9,7 @@ public class SubredditBuilder implements Builder<SubredditImpl> {
 
 	private String title;
 
-	public SubredditBuilder withTittle(String title) {
+	public SubredditBuilder withTitle(String title) {
 		this.title = Objects.requireNonNull(title);
 		return this;
 	}

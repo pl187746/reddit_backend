@@ -70,7 +70,7 @@ public class RedditImpl implements Reddit {
 	@Override
 	public SubredditImpl subredditWithName(String name) {
 		Objects.requireNonNull(name, "name");
-		return new SubredditBuilder().withTittle(name).build();
+		return new SubredditBuilder().withTitle(name).build();
 	}
 	
 	private <C> void fakeEmptyPage(Callback<Page<C>> callback) {
