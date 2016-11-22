@@ -7,8 +7,8 @@ import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 
 public class ResultImpl<R> implements Result<R> {
 
-	private ResultStatus resultStatus;
-	private Optional<R> content;
+	private final ResultStatus resultStatus;
+	private final Optional<R> content;
 
 	public ResultImpl(ResultStatus resultStatus, Optional<R> content) {
 		this.resultStatus = resultStatus;

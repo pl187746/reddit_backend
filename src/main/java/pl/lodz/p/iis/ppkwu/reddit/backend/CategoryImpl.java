@@ -4,7 +4,7 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 
 public class CategoryImpl implements Category {
 
-	private String name;
+	private final String name;
 
 	public CategoryImpl(String name) {
 		this.name = name;
