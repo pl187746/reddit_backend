@@ -14,6 +14,7 @@ public class ResultImpl<R> implements Result<R> {
 	public ResultImpl(ResultStatus resultStatus, Optional<R> content) {
 		this.resultStatus = Objects.requireNonNull(resultStatus, "resultStatus");
 		this.content = Objects.requireNonNull(content, "content");
+		assert succeeded() == content.isPresent();
 	}
 
 	@Override
