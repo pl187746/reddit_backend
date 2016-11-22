@@ -1,7 +1,9 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.Executor;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.Callback;
@@ -9,6 +11,8 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
 import pl.lodz.p.iis.ppkwu.reddit.api.Page;
 import pl.lodz.p.iis.ppkwu.reddit.api.Reddit;
+import pl.lodz.p.iis.ppkwu.reddit.api.Result;
+import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
 
@@ -64,6 +68,12 @@ public class RedditImpl implements Reddit {
 	public SubredditImpl subredditWithName(String name) {
 		Objects.requireNonNull(name, "name");
 		return new SubredditImpl(name);
+	}
+	
+	private void fakeEmptyPage(Callback<Page<News>> callback) {
+		Page<News> page = new PageImpl<>(Collections.EMPTY_LIST);
+		Result<Page<News>> result = new ResultImpl<>(ResultStatus.SUCCEEDED, Optional.of(page));
+		callbackExecutor.execute(() -> { callback.finished(result); });
 	}
 
 }
