@@ -7,19 +7,17 @@ import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 
 public class ResultImpl<R> implements Result<R> {
 
-	private boolean succeeded;
 	private ResultStatus resultStatus;
 	private Optional<R> content;
 
-	public ResultImpl(boolean succeeded, ResultStatus resultStatus, Optional<R> content) {
-		this.succeeded = succeeded;
+	public ResultImpl(ResultStatus resultStatus, Optional<R> content) {
 		this.resultStatus = resultStatus;
 		this.content = content;
 	}
 
 	@Override
 	public boolean succeeded() {
-		return succeeded;
+		return ResultStatus.SUCCEEDED.equals(this.status());
 	}
 
 	@Override
