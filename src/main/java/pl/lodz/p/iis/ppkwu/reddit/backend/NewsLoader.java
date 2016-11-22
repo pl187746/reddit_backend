@@ -22,10 +22,50 @@ public class NewsLoader {
 	}
 
 	public Result<Page<News>> loadNews() {
+		try {
+			perform();
+		} catch (StatusException se) {
+			resultStatus = se.getStatus();
+		}
 		return getResult();
 	}
 
 	public Result<Page<News>> getResult() {
 		return new ResultBuilder<Page<News>>().withContent(pageBuilder.build()).withStatus(resultStatus).build();
 	}
+
+	private static class StatusException extends Exception {
+
+		private static final long serialVersionUID = 7344975565511201932L;
+
+		private final ResultStatus status;
+
+		public StatusException(ResultStatus status, String msg, Throwable cause) {
+			super(msg, cause);
+			this.status = status;
+		}
+
+		public StatusException(ResultStatus status, String msg) {
+			super(msg);
+			this.status = status;
+		}
+
+		public StatusException(ResultStatus status, Throwable cause) {
+			super(cause);
+			this.status = status;
+		}
+
+		public StatusException(ResultStatus status) {
+			this.status = status;
+		}
+
+		public ResultStatus getStatus() {
+			return status;
+		}
+
+	}
+
+	private void perform() throws StatusException {
+	}
+
 }
