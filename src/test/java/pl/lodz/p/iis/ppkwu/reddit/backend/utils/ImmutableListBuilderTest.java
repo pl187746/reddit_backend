@@ -43,6 +43,12 @@ public class ImmutableListBuilderTest {
 		list.set(0, 1);
 	}
 
+	@Test(expected = UnsupportedOperationException.class)
+	public void pustaWynikowaListaJestNiemodyfikowalna() {
+		List<Integer> list = new ImmutableListBuilder<Integer>().build();
+		list.add(42);
+	}
+
 	private ImmutableListBuilder<Integer> builderWithInts0to4() {
 		ImmutableListBuilder<Integer> builder = new ImmutableListBuilder<>();
 		for (int i = 0; i < 5; ++i) {
