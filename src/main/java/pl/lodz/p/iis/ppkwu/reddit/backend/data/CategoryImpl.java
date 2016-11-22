@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data;
 
+import java.util.Objects;
+
 import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 
 public class CategoryImpl implements Category {
@@ -8,8 +10,8 @@ public class CategoryImpl implements Category {
 	private final String relativeUrl;
 
 	public CategoryImpl(String name, String relativeUrl) {
-		this.name = name;
-		this.relativeUrl = relativeUrl;
+		this.name = Objects.requireNonNull(name, "name");
+		this.relativeUrl = Objects.requireNonNull(relativeUrl, "relativeUrl");
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.Result;
@@ -11,8 +12,8 @@ public class ResultImpl<R> implements Result<R> {
 	private final Optional<R> content;
 
 	public ResultImpl(ResultStatus resultStatus, Optional<R> content) {
-		this.resultStatus = resultStatus;
-		this.content = content;
+		this.resultStatus = Objects.requireNonNull(resultStatus, "resultStatus");
+		this.content = Objects.requireNonNull(content, "content");
 	}
 
 	@Override
