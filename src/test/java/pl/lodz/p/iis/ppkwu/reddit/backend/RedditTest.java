@@ -65,7 +65,7 @@ public class RedditTest {
 	@Test
 	public void rezultatPobieraniaWpisowZSubredditaJestSpojny() {
 		SubredditImpl subreddit = new SubredditBuilder().withTitle("pics").build();
-		CategoryImpl category = new CategoryBuilder().withName("").withRelativeUrl("").build();
+		CategoryImpl category = new CategoryBuilder().build();
 		reddit.loadSubredditNews(subreddit, category, ResultTest::rezultatJestSpojny);
 	}
 

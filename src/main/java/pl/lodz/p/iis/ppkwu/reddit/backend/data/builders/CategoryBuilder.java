@@ -7,8 +7,8 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Builder;
 
 public class CategoryBuilder implements Builder<CategoryImpl> {
 
-	private String name;
-	private String relativeUrl;
+	private String name = "";
+	private String relativeUrl = "";
 
 	public CategoryBuilder withName(String name) {
 		this.name = Objects.requireNonNull(name);
