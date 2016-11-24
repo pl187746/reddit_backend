@@ -7,7 +7,7 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Builder;
 
 public class SubredditBuilder implements Builder<SubredditImpl> {
 
-	private String title;
+	private String title = "";
 
 	public SubredditBuilder withTitle(String title) {
 		this.title = Objects.requireNonNull(title);
