@@ -10,16 +10,24 @@ public class UrlEncoder {
 		return encode(string.getBytes(charset));
 	}
 
+	public static void encode(String string, StringBuilder out) {
+		encode(string.getBytes(charset), out);
+	}
+
 	public static String encode(byte[] bytes) {
 		StringBuilder res = new StringBuilder(bytes.length);
+		encode(bytes, res);
+		return res.toString();
+	}
+
+	public static void encode(byte[] bytes, StringBuilder out) {
 		for(byte b : bytes) {
 			if(legalChar(b)) {
-				res.append((char)b);
+				out.append((char)b);
 			} else {
-				res.append(String.format("%%%02X", b));
+				out.append(String.format("%%%02X", b));
 			}
 		}
-		return res.toString();
 	}
 
 	public static boolean legalChar(int c) {
