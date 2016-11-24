@@ -1,8 +1,8 @@
-package pl.lodz.p.iis.ppkwu.reddit.backend;
+package pl.lodz.p.iis.ppkwu.reddit.backend.utils;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 
-class StatusException extends Exception {
+public class StatusException extends Exception {
 
 	private static final long serialVersionUID = 7344975565511201932L;
 

@@ -10,6 +10,7 @@ import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Downloader;
+import pl.lodz.p.iis.ppkwu.reddit.backend.utils.StatusException;
 
 public class NewsLoader {
 
