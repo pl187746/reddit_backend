@@ -1,5 +1,6 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import java.io.IOException;
 import java.net.URL;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
@@ -8,6 +9,7 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
+import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Downloader;
 
 public class NewsLoader {
 
@@ -66,6 +68,14 @@ public class NewsLoader {
 	}
 
 	private void perform() throws StatusException {
+		byte[] data = download();
 	}
 
+	private byte[] download() throws StatusException {
+		try {
+			return Downloader.download(url);
+		} catch (IOException ex) {
+			throw new StatusException(ResultStatus.CONNECTION_ERROR, "downloading", ex);
+		}
+	}
 }
