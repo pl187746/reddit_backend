@@ -8,7 +8,7 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.CategoryImpl;
-import pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvalidNameException;
+import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.InvalidNameException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.UrlEncoder;
 
 public class UrlGenerator {

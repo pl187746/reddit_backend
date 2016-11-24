@@ -1,4 +1,4 @@
-package pl.lodz.p.iis.ppkwu.reddit.backend.utils;
+package pl.lodz.p.iis.ppkwu.reddit.backend.exceptions;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
 

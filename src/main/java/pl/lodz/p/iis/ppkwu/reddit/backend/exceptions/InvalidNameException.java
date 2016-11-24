@@ -1,4 +1,4 @@
-package pl.lodz.p.iis.ppkwu.reddit.backend.utils;
+package pl.lodz.p.iis.ppkwu.reddit.backend.exceptions;
 
 public class InvalidNameException extends Exception {
 
