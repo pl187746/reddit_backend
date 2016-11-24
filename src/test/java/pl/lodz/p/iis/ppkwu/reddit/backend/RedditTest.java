@@ -23,11 +23,10 @@ public class RedditTest {
 
 	@Before
 	public void setUp() {
-		reddit = new RedditBuilderImpl().withWorkerExecutor(SameThreadExecutor.get()) // efektywnie
-																						// wymusza
-																						// synchroniczne
-																						// wywołania
-				.withCallbackExecutor(SameThreadExecutor.get()).build();
+		reddit = new RedditBuilderImpl()
+			.withWorkerExecutor(SameThreadExecutor.get()) // efektywnie wymusza synchroniczne wywołania
+			.withCallbackExecutor(SameThreadExecutor.get())
+			.build();
 	}
 
 	@Test
