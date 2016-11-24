@@ -1,7 +1,11 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
 import pl.lodz.p.iis.ppkwu.reddit.api.Page;
@@ -39,6 +43,7 @@ public class NewsLoader {
 
 	private void perform() throws StatusException {
 		byte[] data = download();
+		Document document = parse(data);
 	}
 
 	private byte[] download() throws StatusException {
@@ -48,4 +53,13 @@ public class NewsLoader {
 			throw new StatusException(ResultStatus.CONNECTION_ERROR, "downloading", ex);
 		}
 	}
+
+	private Document parse(byte[] data) throws StatusException {
+		try (ByteArrayInputStream input = new ByteArrayInputStream(data)) {
+			return Jsoup.parse(input, "UTF-8", url.toString());
+		} catch (Exception ex) {
+			throw new StatusException(ResultStatus.DATA_ERROR, "parsing", ex);
+		}
+	}
+
 }
