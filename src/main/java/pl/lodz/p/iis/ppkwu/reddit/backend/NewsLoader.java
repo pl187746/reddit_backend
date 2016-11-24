@@ -44,6 +44,7 @@ public class NewsLoader {
 	private void perform() throws StatusException {
 		byte[] data = download();
 		Document document = parse(data);
+		extractNews(document);
 	}
 
 	private byte[] download() throws StatusException {
@@ -60,6 +61,9 @@ public class NewsLoader {
 		} catch (Exception ex) {
 			throw new StatusException(ResultStatus.DATA_ERROR, "parsing", ex);
 		}
+	}
+
+	private void extractNews(Document document) {
 	}
 
 }
