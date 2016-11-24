@@ -10,7 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.CategoryImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.ResultTest;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.SubredditImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.CategoryBuilder;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.SubredditBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.SameThreadExecutor;
 
 public class RedditTest {
@@ -19,10 +23,11 @@ public class RedditTest {
 
 	@Before
 	public void setUp() {
-		reddit = new RedditBuilderImpl()
-			.withWorkerExecutor(SameThreadExecutor.get()) // efektywnie wymusza synchroniczne wywołania
-			.withCallbackExecutor(SameThreadExecutor.get())
-			.build();
+		reddit = new RedditBuilderImpl().withWorkerExecutor(SameThreadExecutor.get()) // efektywnie
+																						// wymusza
+																						// synchroniczne
+																						// wywołania
+				.withCallbackExecutor(SameThreadExecutor.get()).build();
 	}
 
 	@Test
@@ -56,6 +61,13 @@ public class RedditTest {
 	@Test
 	public void rezultatPobieraniaWpisowPoPustejLiscieSlowKluczowychJestSpojny() {
 		reddit.loadNewsByKeywords(Collections.emptyList(), ResultTest::rezultatJestSpojny);
+	}
+
+	@Test
+	public void rezultatPobieraniaWpisowZSubredditaJestSpojny() {
+		SubredditImpl subreddit = new SubredditBuilder().withTitle("pics").build();
+		CategoryImpl category = new CategoryBuilder().withName("").withRelativeUrl("").build();
+		reddit.loadSubredditNews(subreddit, category, ResultTest::rezultatJestSpojny);
 	}
 
 }
