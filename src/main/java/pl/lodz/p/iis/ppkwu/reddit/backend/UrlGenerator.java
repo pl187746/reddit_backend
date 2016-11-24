@@ -8,6 +8,7 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.CategoryImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvalidNameException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.UrlEncoder;
 
 public class UrlGenerator {
@@ -33,7 +34,11 @@ public class UrlGenerator {
 		return baseUrl;
 	}
 
-	public static URL subredditNewsUrl(Subreddit subreddit, Category category) throws MalformedURLException {
+	public static URL subredditNewsUrl(Subreddit subreddit, Category category)
+			throws MalformedURLException, InvalidNameException {
+		if (subreddit.title().isEmpty()) {
+			throw new InvalidNameException("empty subreddit name");
+		}
 		CategoryImpl catImpl = (CategoryImpl) category;
 		return subredditNewsUrl(subreddit, catImpl);
 	}
@@ -43,7 +48,10 @@ public class UrlGenerator {
 		return new URL(subUrl, category.relativeUrl());
 	}
 
-	public static URL userNewsUrl(User user) throws MalformedURLException {
+	public static URL userNewsUrl(User user) throws MalformedURLException, InvalidNameException {
+		if (user.login().isEmpty()) {
+			throw new InvalidNameException("empty user name");
+		}
 		return new URL(usersUrl, UrlEncoder.encode(user.login()) + userSubmittedUrlSuffix);
 	}
 
