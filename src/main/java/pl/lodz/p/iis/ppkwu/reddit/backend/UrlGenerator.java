@@ -8,6 +8,7 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.CategoryImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.utils.UrlEncoder;
 
 public class UrlGenerator {
 
@@ -38,12 +39,12 @@ public class UrlGenerator {
 	}
 
 	public static URL subredditNewsUrl(Subreddit subreddit, CategoryImpl category) throws MalformedURLException {
-		URL subUrl = new URL(subredditsUrl, subreddit.title() + "/");
+		URL subUrl = new URL(subredditsUrl, UrlEncoder.encode(subreddit.title()) + "/");
 		return new URL(subUrl, category.relativeUrl());
 	}
 
 	public static URL userNewsUrl(User user) throws MalformedURLException {
-		return new URL(usersUrl, user.login() + userSubmittedUrlSuffix);
+		return new URL(usersUrl, UrlEncoder.encode(user.login()) + userSubmittedUrlSuffix);
 	}
 
 	public static URL newsByKeywordsUrl(List<String> keywords) throws MalformedURLException {
@@ -53,7 +54,7 @@ public class UrlGenerator {
 	}
 
 	public static String joinKeywords(List<String> keywords) {
-		return String.join("+", (Iterable<String>) keywords.stream().filter(k -> k != null && !k.isEmpty())::iterator);
+		return String.join("+", (Iterable<String>) keywords.stream().filter(k -> k != null && !k.isEmpty()).map(UrlEncoder::encode)::iterator);
 	}
 
 }

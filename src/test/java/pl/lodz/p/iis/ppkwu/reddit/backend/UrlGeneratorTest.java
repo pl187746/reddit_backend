@@ -35,4 +35,23 @@ public class UrlGeneratorTest {
 		assertThat(url, equalTo(new URL(UrlGenerator.baseUrl(), "/search?q=qwerty+uiop")));
 	}
 
+	@Test
+	public void subredditZeZnakami() throws MalformedURLException {
+		URL url = UrlGenerator.subredditNewsUrl(new SubredditImpl("ąćę"), new CategoryImpl("", "top"));
+		assertThat(url, equalTo(new URL(UrlGenerator.baseUrl(), "/r/%C4%85%C4%87%C4%99/top")));
+	}
+
+	@Test
+	public void uzytkownikZeZnakami() throws MalformedURLException {
+		URL url = UrlGenerator.userNewsUrl(new UserImpl("ąćę"));
+		assertThat(url, equalTo(new URL(UrlGenerator.baseUrl(), "/user/%C4%85%C4%87%C4%99/submitted")));
+	}
+
+	@Test
+	public void slowaKluczoweZeZnakami() throws MalformedURLException {
+		List<String> keywords = Arrays.asList("abc 123", "xyz+5");
+		URL url = UrlGenerator.newsByKeywordsUrl(keywords);
+		assertThat(url, equalTo(new URL(UrlGenerator.baseUrl(), "/search?q=abc%20123+xyz%2B5")));
+	}
+
 }
