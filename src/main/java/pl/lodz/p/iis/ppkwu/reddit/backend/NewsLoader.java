@@ -81,6 +81,12 @@ public class NewsLoader {
         return url;
     }
 
+    private String getTitle(Element newsElement) {
+        Elements titleElements = newsElement.getElementsByClass("title");
+
+        return titleElements.isEmpty() ? "unknown title" : titleElements.first().text();
+    }
+
     }
 
 }
