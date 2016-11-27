@@ -1,20 +1,25 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.net.URL;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
 import pl.lodz.p.iis.ppkwu.reddit.api.Page;
 import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.NewsBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Downloader;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Optional;
 
 public class NewsLoader {
 
@@ -64,6 +69,24 @@ public class NewsLoader {
     }
 
     private void extractNews(Document document) {
+        Elements news = getNewsFromDocument(document);
+        if (null != news)
+            for (Element newsElement : news) {
+
+                NewsBuilder newsBuilder = new NewsBuilder();
+
+                String title = getTitle(newsElement);
+                String author = getAuthor(newsElement);
+                Optional<URL> url = getURL(newsElement);
+
+                newsBuilder.withTitle(title);
+                newsBuilder.withAuthor(new UserImpl(author));
+                newsBuilder.withThumbnailUrl(url);
+
+                pageBuilder.addEntry(newsBuilder.build());
+            }
+
+    }
 
     private Elements getNewsFromDocument(Document document) {
         return document.getElementsByClass("thing");
