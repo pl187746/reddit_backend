@@ -82,7 +82,7 @@ public class NewsLoader {
                 UserImpl author = getAuthor(newsElement);
                 newsBuilder.withAuthor(author);
 
-                Optional<URL> url = getURL(newsElement);
+                Optional<URL> url = getThumbnailUrl(newsElement);
                 newsBuilder.withThumbnailUrl(url);
 
                 pageBuilder.addEntry(newsBuilder.build());
@@ -94,16 +94,17 @@ public class NewsLoader {
         return document.getElementsByClass("thing");
     }
 
-    private Optional<URL> getURL(Element newsElement) {
-        Elements thumbnailElements = newsElement.getElementsByTag("img");
-        Optional<URL> url = Optional.empty();
-        try {
-            url = thumbnailElements.isEmpty() ? Optional.empty() : Optional.of(new URL(thumbnailElements.first().absUrl("src")));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+    private Optional<URL> getThumbnailUrl(Element newsElement) {
+        Optional<URL> thumbnailUrl = Optional.empty();
+        Elements thumbnailElements = newsElement.select("a.thumbnail img");
+        if(!thumbnailElements.isEmpty()) {
+            try {
+                URL url = new URL(thumbnailElements.first().absUrl("src"));
+                thumbnailUrl = Optional.of(url);
+            } catch (MalformedURLException e) {
+            }
         }
-
-        return url;
+        return thumbnailUrl;
     }
 
     private String getTitle(Element newsElement) throws StatusException {
