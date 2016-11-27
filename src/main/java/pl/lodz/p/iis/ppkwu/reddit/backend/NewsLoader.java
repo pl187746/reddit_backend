@@ -77,11 +77,12 @@ public class NewsLoader {
                 NewsBuilder newsBuilder = new NewsBuilder();
 
                 String title = getTitle(newsElement);
-                UserImpl author = getAuthor(newsElement);
-                Optional<URL> url = getURL(newsElement);
-
                 newsBuilder.withTitle(title);
+
+                UserImpl author = getAuthor(newsElement);
                 newsBuilder.withAuthor(author);
+
+                Optional<URL> url = getURL(newsElement);
                 newsBuilder.withThumbnailUrl(url);
 
                 pageBuilder.addEntry(newsBuilder.build());
