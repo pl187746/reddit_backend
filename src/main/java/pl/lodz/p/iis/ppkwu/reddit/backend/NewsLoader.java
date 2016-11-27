@@ -12,6 +12,7 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.NewsBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.UserBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Downloader;
 
@@ -76,11 +77,11 @@ public class NewsLoader {
                 NewsBuilder newsBuilder = new NewsBuilder();
 
                 String title = getTitle(newsElement);
-                String author = getAuthor(newsElement);
+                UserImpl author = getAuthor(newsElement);
                 Optional<URL> url = getURL(newsElement);
 
                 newsBuilder.withTitle(title);
-                newsBuilder.withAuthor(new UserImpl(author));
+                newsBuilder.withAuthor(author);
                 newsBuilder.withThumbnailUrl(url);
 
                 pageBuilder.addEntry(newsBuilder.build());
@@ -112,12 +113,14 @@ public class NewsLoader {
         return titleElements.first().text();
     }
 
-    private String getAuthor(Element newsElement) throws StatusException {
+    private UserImpl getAuthor(Element newsElement) throws StatusException {
         Elements authorElements = newsElement.select("a.author");
         if(authorElements.isEmpty()) {
         	throw new StatusException(ResultStatus.DATA_ERROR, "no author");
         }
-        return authorElements.first().text();
+        UserBuilder userBuilder = new UserBuilder();
+        userBuilder.withLogin(authorElements.first().text());
+        return userBuilder.build();
     }
 
 }
