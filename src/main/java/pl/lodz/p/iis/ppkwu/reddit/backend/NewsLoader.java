@@ -87,6 +87,10 @@ public class NewsLoader {
         return titleElements.isEmpty() ? "unknown title" : titleElements.first().text();
     }
 
+    private String getAuthor(Element newsElement) {
+        Elements authorElements = newsElement.getElementsByClass("author");
+
+        return authorElements.isEmpty() ? "unknown author" : authorElements.first().text();
     }
 
 }
