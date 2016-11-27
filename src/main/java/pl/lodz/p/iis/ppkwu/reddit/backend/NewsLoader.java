@@ -68,7 +68,7 @@ public class NewsLoader {
         }
     }
 
-    private void extractNews(Document document) {
+    private void extractNews(Document document) throws StatusException {
         Elements news = getNewsFromDocument(document);
         if (null != news)
             for (Element newsElement : news) {
@@ -104,16 +104,20 @@ public class NewsLoader {
         return url;
     }
 
-    private String getTitle(Element newsElement) {
+    private String getTitle(Element newsElement) throws StatusException {
         Elements titleElements = newsElement.select("a.title");
-
-        return titleElements.isEmpty() ? "unknown title" : titleElements.first().text();
+        if(titleElements.isEmpty()) {
+        	throw new StatusException(ResultStatus.DATA_ERROR, "no title");
+        }
+        return titleElements.first().text();
     }
 
-    private String getAuthor(Element newsElement) {
+    private String getAuthor(Element newsElement) throws StatusException {
         Elements authorElements = newsElement.select("a.author");
-
-        return authorElements.isEmpty() ? "unknown author" : authorElements.first().text();
+        if(authorElements.isEmpty()) {
+        	throw new StatusException(ResultStatus.DATA_ERROR, "no author");
+        }
+        return authorElements.first().text();
     }
 
 }
