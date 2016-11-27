@@ -69,6 +69,18 @@ public class NewsLoader {
         return document.getElementsByClass("thing");
     }
 
+    private Optional<URL> getURL(Element newsElement) {
+        Elements thumbnailElements = newsElement.getElementsByTag("img");
+        Optional<URL> url = Optional.empty();
+        try {
+            url = thumbnailElements.isEmpty() ? Optional.empty() : Optional.of(new URL(thumbnailElements.first().absUrl("src")));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
+
     }
 
 }
