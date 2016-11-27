@@ -64,6 +64,11 @@ public class NewsLoader {
     }
 
     private void extractNews(Document document) {
+
+    private Elements getNewsFromDocument(Document document) {
+        return document.getElementsByClass("thing");
+    }
+
     }
 
 }
