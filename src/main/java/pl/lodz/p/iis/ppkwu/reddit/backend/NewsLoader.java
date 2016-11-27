@@ -105,13 +105,13 @@ public class NewsLoader {
     }
 
     private String getTitle(Element newsElement) {
-        Elements titleElements = newsElement.getElementsByClass("title");
+        Elements titleElements = newsElement.select("a.title");
 
         return titleElements.isEmpty() ? "unknown title" : titleElements.first().text();
     }
 
     private String getAuthor(Element newsElement) {
-        Elements authorElements = newsElement.getElementsByClass("author");
+        Elements authorElements = newsElement.select("a.author");
 
         return authorElements.isEmpty() ? "unknown author" : authorElements.first().text();
     }
