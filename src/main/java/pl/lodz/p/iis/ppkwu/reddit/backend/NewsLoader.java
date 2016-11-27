@@ -91,7 +91,7 @@ public class NewsLoader {
     }
 
     private Elements getNewsFromDocument(Document document) {
-        return document.getElementsByClass("thing");
+        return document.select("div.thing, div.search-result-link");
     }
 
     private Optional<URL> getThumbnailUrl(Element newsElement) {
@@ -108,7 +108,7 @@ public class NewsLoader {
     }
 
     private String getTitle(Element newsElement) throws StatusException {
-        Elements titleElements = newsElement.select("a.title");
+        Elements titleElements = newsElement.select("a.title, a.search-title");
         if(titleElements.isEmpty()) {
         	throw new StatusException(ResultStatus.DATA_ERROR, "no title");
         }
