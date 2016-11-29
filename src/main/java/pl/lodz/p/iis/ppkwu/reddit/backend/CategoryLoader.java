@@ -60,6 +60,8 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 					}
 				}
 				
+				contentBuilder.addEntry(categoryBuilder.build());
+				
 			}
 		}
 	}
