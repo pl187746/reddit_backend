@@ -4,9 +4,12 @@ import java.net.URL;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.Category;
+import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.CategoryBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.ImmutableListBuilder;
 
@@ -20,6 +23,22 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 	protected void extract(Document document) throws StatusException {
 		Elements categories = getCategoriesFromDocument(document);
 		
+		if(null != categories) {
+			for(Element categoryElement : categories) {
+				
+				CategoryBuilder categoryBuilder = new CategoryBuilder();
+				String url = getURL(categoryElement);
+				
+			}
+		}
+	}
+
+	private String getURL(Element categoryElement) throws StatusException {
+		Elements categoryElements = categoryElement.select("a.[href]");
+		if (categoryElements.isEmpty()) {
+			throw new StatusException(ResultStatus.DATA_ERROR, "no category");
+		}
+		return categoryElements.first().text();
 	}
 
 	private Elements getCategoriesFromDocument(Document document) {
