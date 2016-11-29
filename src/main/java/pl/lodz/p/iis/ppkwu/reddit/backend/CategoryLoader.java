@@ -34,27 +34,29 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				String[] parts = url.split("//");
 				String[] subparts = parts[1].split("/");
 				
-				switch(subparts.length){
+				int subpartsLength = subparts.length;
+				
+				switch(subpartsLength){
 				case 1:
 					categoryName = "hot";
 					categoryBuilder.withName(categoryName);
 					break;
 				case 2:
-					categoryName = subparts[(subparts.length)-1];
-					if(!categoryName.equals("gilded") && !categoryName.equals("wiki") && !categoryName.equals("promoted")){
+					categoryName = subparts[subpartsLength-1];
+					if(isValidCategory(categoryName)){
 						categoryBuilder.withName(categoryName);
 					}
 					break;
 				}
 				
-				if(subparts.length > 2) {
+				if(subpartsLength > 2) {
 					if(subparts[3].isEmpty()){
 						categoryName = "hot";
 						categoryBuilder.withName(categoryName);
 					}
 					else {
 						categoryName = subparts[3];
-						if(!categoryName.equals("gilded") && !categoryName.equals("wiki") && !categoryName.equals("promoted")){
+						if(isValidCategory(categoryName)){
 							categoryBuilder.withName(categoryName);
 						}
 					}
@@ -64,6 +66,10 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				
 			}
 		}
+	}
+
+	private boolean isValidCategory(String categoryName) {
+		return !categoryName.equals("gilded") && !categoryName.equals("wiki") && !categoryName.equals("promoted");
 	}
 
 	private String getURL(Element categoryElement) throws StatusException {
