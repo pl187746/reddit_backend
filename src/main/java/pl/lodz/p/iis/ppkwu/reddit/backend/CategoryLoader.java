@@ -29,8 +29,16 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				CategoryBuilder categoryBuilder = new CategoryBuilder();
 				String url = getURL(categoryElement);
 				
+				String categoryName = "";
+				
 				String[] parts = url.split("//");
 				String[] subparts = parts[1].split("/");
+				
+				switch(subparts.length){
+				case 1:
+					categoryName = "hot";
+					categoryBuilder.withName(categoryName);
+				}
 				
 			}
 		}
