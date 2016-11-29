@@ -29,6 +29,9 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				CategoryBuilder categoryBuilder = new CategoryBuilder();
 				String url = getURL(categoryElement);
 				
+				String[] parts = url.split("//");
+				String[] subparts = parts[1].split("/");
+				
 			}
 		}
 	}
