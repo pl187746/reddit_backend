@@ -38,6 +38,13 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				case 1:
 					categoryName = "hot";
 					categoryBuilder.withName(categoryName);
+					break;
+				case 2:
+					categoryName = subparts[(subparts.length)-1];
+					if(!categoryName.equals("gilded") && !categoryName.equals("wiki") && !categoryName.equals("promoted")){
+						categoryBuilder.withName(categoryName);
+					}
+					break;
 				}
 				
 			}
