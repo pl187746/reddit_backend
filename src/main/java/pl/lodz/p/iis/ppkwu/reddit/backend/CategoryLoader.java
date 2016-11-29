@@ -30,6 +30,7 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				String url = getURL(categoryElement);
 				
 				String categoryName = "";
+				boolean validCategory = true;
 				
 				String[] parts = url.split("//");
 				String[] subparts = parts[1].split("/");
@@ -39,31 +40,27 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				switch(subpartsLength){
 				case 1:
 					categoryName = "hot";
-					categoryBuilder.withName(categoryName);
 					break;
 				case 2:
 					categoryName = subparts[subpartsLength-1];
-					if(isValidCategory(categoryName)){
-						categoryBuilder.withName(categoryName);
-					}
+					validCategory = isValidCategory(categoryName);
 					break;
 				}
 				
 				if(subpartsLength > 2) {
 					if(subparts[3].isEmpty()){
-						categoryName = "hot";
-						categoryBuilder.withName(categoryName);
+						categoryName = "hot";	
 					}
 					else {
 						categoryName = subparts[3];
-						if(isValidCategory(categoryName)){
-							categoryBuilder.withName(categoryName);
-						}
+						validCategory = isValidCategory(categoryName);
 					}
 				}
 				
-				contentBuilder.addEntry(categoryBuilder.build());
-				
+				if(validCategory){
+					categoryBuilder.withName(categoryName);
+					contentBuilder.addEntry(categoryBuilder.build());
+				}
 			}
 		}
 	}
