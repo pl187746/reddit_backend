@@ -54,9 +54,10 @@ public class RedditWorker {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void loadNewsFromUrl(URL url, Callback<Page<News>> callback) {
 		NewsLoader newsLoader = new NewsLoader(url);
-		Result<Page<News>> result = newsLoader.load();
+		Result<Page<News>> result = (Result<Page<News>>) (Object) newsLoader.load();
 		runCallback(callback, result);
 	}
 
