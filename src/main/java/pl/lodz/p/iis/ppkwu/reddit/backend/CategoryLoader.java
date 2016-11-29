@@ -15,6 +15,11 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.utils.ImmutableListBuilder;
 
 public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableListBuilder<Category>> {
 
+	private static final String PROMOTED_CATEGORY = "promoted";
+	private static final String WIKI_CATEGORY = "wiki";
+	private static final String GILDED_CATEGORY = "gilded";
+	private static final String HOT_CATEGORY = "hot";
+
 	protected CategoryLoader(URL url) {
 		super(url, new ImmutableListBuilder<>());
 	}
@@ -39,7 +44,7 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				
 				switch(subpartsLength){
 				case 1:
-					categoryName = "hot";
+					categoryName = HOT_CATEGORY;
 					break;
 				case 2:
 					categoryName = subparts[subpartsLength-1];
@@ -49,7 +54,7 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				
 				if(subpartsLength > 2) {
 					if(subparts[3].isEmpty()){
-						categoryName = "hot";	
+						categoryName = HOT_CATEGORY;	
 					}
 					else {
 						categoryName = subparts[3];
@@ -75,7 +80,7 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 	}
 
 	private boolean isValidCategory(String categoryName) {
-		return !categoryName.equals("gilded") && !categoryName.equals("wiki") && !categoryName.equals("promoted");
+		return !GILDED_CATEGORY.equals(categoryName) && !WIKI_CATEGORY.equals(categoryName) && !PROMOTED_CATEGORY.equals(categoryName);
 	}
 
 	private String getURL(Element categoryElement) throws StatusException {
