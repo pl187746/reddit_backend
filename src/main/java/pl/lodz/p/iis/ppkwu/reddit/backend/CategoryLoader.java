@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
@@ -17,7 +18,12 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 
 	@Override
 	protected void extract(Document document) throws StatusException {
-		;
+		Elements categories = getCategoriesFromDocument(document);
+		
+	}
+
+	private Elements getCategoriesFromDocument(Document document) {
+		return document.select("ul.tabmenu, a.choice");
 	}
 
 }
