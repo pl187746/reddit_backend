@@ -58,11 +58,20 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 				}
 				
 				if(validCategory){
-					categoryBuilder.withName(categoryName);
+					String relativeUrl = getRelativeUrl(subparts, subpartsLength);
+					categoryBuilder.withName(categoryName).withRelativeUrl(relativeUrl);
 					contentBuilder.addEntry(categoryBuilder.build());
 				}
 			}
 		}
+	}
+
+	private String getRelativeUrl(String[] subparts, int subpartsLength) {
+		String relativeUrl = "/";
+		for(int i = 1; i < subpartsLength; i++){
+			relativeUrl = relativeUrl + subparts[i] + "/";
+		}
+		return relativeUrl;
 	}
 
 	private boolean isValidCategory(String categoryName) {
