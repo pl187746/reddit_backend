@@ -47,6 +47,19 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 					break;
 				}
 				
+				if(subparts.length > 2) {
+					if(subparts[3].isEmpty()){
+						categoryName = "hot";
+						categoryBuilder.withName(categoryName);
+					}
+					else {
+						categoryName = subparts[3];
+						if(!categoryName.equals("gilded") && !categoryName.equals("wiki") && !categoryName.equals("promoted")){
+							categoryBuilder.withName(categoryName);
+						}
+					}
+				}
+				
 			}
 		}
 	}
