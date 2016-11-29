@@ -56,7 +56,7 @@ public class RedditWorker {
 
 	public void loadNewsFromUrl(URL url, Callback<Page<News>> callback) {
 		NewsLoader newsLoader = new NewsLoader(url);
-		Result<Page<News>> result = newsLoader.loadNews();
+		Result<Page<News>> result = newsLoader.load();
 		runCallback(callback, result);
 	}
 

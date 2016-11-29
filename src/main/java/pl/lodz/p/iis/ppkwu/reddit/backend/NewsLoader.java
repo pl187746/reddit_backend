@@ -34,7 +34,7 @@ public class NewsLoader {
         this.url = url;
     }
 
-    public Result<Page<News>> loadNews() {
+    public Result<Page<News>> load() {
         try {
             perform();
         } catch (StatusException se) {
@@ -50,7 +50,7 @@ public class NewsLoader {
     private void perform() throws StatusException {
         byte[] data = download();
         Document document = parse(data);
-        extractNews(document);
+        extract(document);
     }
 
     private byte[] download() throws StatusException {
@@ -69,7 +69,7 @@ public class NewsLoader {
         }
     }
 
-    private void extractNews(Document document) throws StatusException {
+    private void extract(Document document) throws StatusException {
         Elements news = getNewsFromDocument(document);
         if (null != news)
             for (Element newsElement : news) {
