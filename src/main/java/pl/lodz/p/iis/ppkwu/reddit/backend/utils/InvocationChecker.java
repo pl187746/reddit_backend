@@ -2,10 +2,10 @@ package pl.lodz.p.iis.ppkwu.reddit.backend.utils;
 
 public class InvocationChecker {
 
-	private static String[] PERMITTED_PREFIXES = { "pl.lodz.p.iis.ppkwu.reddit.backend.",
+	private static final String[] PERMITTED_PREFIXES = { "pl.lodz.p.iis.ppkwu.reddit.backend.",
 			"pl.lodz.p.iis.ppkwu.reddit.api." };
 
-	private static int CALLER_OF_CALLER_OF_CHECKER = 3;
+	private static final int CALLER_OF_CALLER_OF_CHECKER = 3;
 
 	private InvocationChecker() {
 		throw new UnsupportedOperationException();
