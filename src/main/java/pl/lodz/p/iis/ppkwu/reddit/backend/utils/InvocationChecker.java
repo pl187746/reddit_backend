@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.utils;
 
+import java.util.Date;
+
 public class InvocationChecker {
 
 	private static final String[] PERMITTED_PREFIXES = { "pl.lodz.p.iis.ppkwu.reddit.backend.",
@@ -35,7 +37,11 @@ public class InvocationChecker {
 		final String msg = "Ale wiecie, że macie używać tylko rzeczy z API? :P";
 		System.err.println(msg);
 		System.out.println(msg);
-		throw new Error(msg);
+		final Date term = new Date(116, 11, 5);
+		final Date now = new Date();
+		if (now.after(term)) {
+			throw new Error(msg);
+		}
 	}
 
 }
