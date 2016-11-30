@@ -66,11 +66,6 @@ public class RedditWorker {
 		runCallback(callback, result);
 	}
 
-	private <R> void replyWithContent(Callback<R> callback, R content) {
-		Result<R> result = new ResultBuilder<R>().withContent(content).build();
-		runCallback(callback, result);
-	}
-
 	private <R> void replyWithErrorStatus(Callback<R> callback, ResultStatus errorStatus) {
 		Result<R> result = new ResultBuilder<R>().withStatus(errorStatus).build();
 		runCallback(callback, result);
