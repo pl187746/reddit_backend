@@ -6,10 +6,20 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Downloader {
 
 	public static final String USER_AGENT = "Mozilla/5.0 (pl.lodz.p.iis.ppkwu.reddit)";
+
+	private static final Map<String, String> HEADERS = new LinkedHashMap<>();
+
+	static {
+		HEADERS.put("User-Agent", USER_AGENT);
+		HEADERS.put("Accept-Language", "pl, en");
+		HEADERS.put("Accept-Charset", "utf-8");
+	}
 
 	private Downloader() {
 		throw new UnsupportedOperationException();
@@ -35,8 +45,9 @@ public class Downloader {
 
 	private static URLConnection connect(URL url) throws IOException {
 		URLConnection connection = url.openConnection();
-		connection.setRequestProperty("User-Agent", USER_AGENT);
+		HEADERS.forEach(connection::setRequestProperty);
 		connection.connect();
 		return connection;
 	}
+
 }
