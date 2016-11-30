@@ -29,8 +29,10 @@ public class RedditWorker {
 		checkInvocation();
 	}
 
-	public void loadCategoriesList(Callback<List<Category>> callback) throws NullPointerException {
-		replyWithContent(callback, FixedCategories.getList());
+	public void loadCategoriesList(Callback<List<Category>> callback) {
+		CategoryLoader categoryLoader = new CategoryLoader();
+		Result<List<Category>> result = categoryLoader.load();
+		runCallback(callback, result);
 	}
 
 	public void loadSubredditNews(Subreddit subreddit, Category category, Callback<Page<News>> callback) {
