@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -14,6 +16,7 @@ public class RedditBuilderImpl implements RedditBuilder, Builder<RedditImpl> {
 	private Executor workerExecutor;
 
 	public RedditBuilderImpl() {
+		checkInvocation();
 	}
 
 	@Override
@@ -31,6 +34,7 @@ public class RedditBuilderImpl implements RedditBuilder, Builder<RedditImpl> {
 	}
 
 	public RedditBuilderImpl withWorkerExecutor(Executor workerExecutor) {
+		checkInvocation();
 		this.workerExecutor = workerExecutor;
 		return this;
 	}
