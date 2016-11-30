@@ -23,6 +23,7 @@ public class CategoryImpl implements Category {
 	}
 
 	public String relativeUrl() {
+		checkInvocation();
 		return relativeUrl;
 	}
 
