@@ -2,7 +2,6 @@ package pl.lodz.p.iis.ppkwu.reddit.backend;
 
 import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
 
-import java.net.URL;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
@@ -22,8 +21,8 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 	private static final String GILDED_CATEGORY = "gilded";
 	private static final String HOT_CATEGORY = "hot";
 
-	protected CategoryLoader(URL url) {
-		super(url, new ImmutableListBuilder<>());
+	protected CategoryLoader() {
+		super(UrlGenerator.baseUrl(), new ImmutableListBuilder<>());
 		checkInvocation();
 	}
 
