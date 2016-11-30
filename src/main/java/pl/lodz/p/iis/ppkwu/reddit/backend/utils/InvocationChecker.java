@@ -15,12 +15,12 @@ public class InvocationChecker {
 		StackTraceElement[] stackTrace = getStackTrace();
 		StackTraceElement callerOfCaller = stackTrace[CALLER_OF_CALLER_OF_CHECKER];
 		String className = callerOfCaller.getClassName();
-		System.out.println(className);
 		for (String prefix : PERMITTED_PREFIXES) {
 			if (className.startsWith(prefix)) {
 				return;
 			}
 		}
+		illegalInvocation();
 	}
 
 	private static StackTraceElement[] getStackTrace() {
@@ -29,6 +29,13 @@ public class InvocationChecker {
 		} catch (Throwable thr) {
 			return thr.getStackTrace();
 		}
+	}
+
+	private static void illegalInvocation() {
+		final String msg = "Ale wiecie, że macie używać tylko rzeczy z API? :P";
+		System.err.println(msg);
+		System.out.println(msg);
+		throw new Error(msg);
 	}
 
 }
