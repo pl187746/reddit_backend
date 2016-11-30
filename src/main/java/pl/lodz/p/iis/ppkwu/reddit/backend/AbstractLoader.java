@@ -16,7 +16,7 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Builder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Downloader;
 
-public abstract class AbstractLoader<R, B extends Builder<R>> {
+public abstract class AbstractLoader<R, B extends Builder<? extends R>> {
 
 	protected URL url;
 	protected B contentBuilder;

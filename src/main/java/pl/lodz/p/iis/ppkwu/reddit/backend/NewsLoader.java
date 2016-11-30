@@ -11,15 +11,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
+import pl.lodz.p.iis.ppkwu.reddit.api.Page;
 import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
-import pl.lodz.p.iis.ppkwu.reddit.backend.data.PageImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.NewsBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.UserBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 
-public class NewsLoader extends AbstractLoader<PageImpl<News>, PageBuilder<News>> {
+public class NewsLoader extends AbstractLoader<Page<News>, PageBuilder<News>> {
 
 	public NewsLoader(URL url) {
 		super(url, new PageBuilder<News>());
