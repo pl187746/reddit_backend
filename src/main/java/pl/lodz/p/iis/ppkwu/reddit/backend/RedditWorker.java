@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +26,7 @@ public class RedditWorker {
 	public RedditWorker(Executor callbackExecutor) {
 		Objects.requireNonNull(callbackExecutor, "callbackExecutor");
 		this.callbackExecutor = callbackExecutor;
+		checkInvocation();
 	}
 
 	public void loadCategoriesList(Callback<List<Category>> callback) throws NullPointerException {

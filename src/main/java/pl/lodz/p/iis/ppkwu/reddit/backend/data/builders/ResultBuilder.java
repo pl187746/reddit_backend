@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data.builders;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.util.Objects;
 import java.util.Optional;
 
@@ -12,9 +14,13 @@ public class ResultBuilder<R> implements Builder<ResultImpl<R>> {
 	private ResultStatus resultStatus;
 	private Optional<R> content = Optional.empty();
 
+	public ResultBuilder() {
+		checkInvocation();
+	}
+
 	public ResultBuilder<R> withStatus(ResultStatus status) {
 		this.resultStatus = Objects.requireNonNull(status);
-		if(!ResultStatus.SUCCEEDED.equals(status)) {
+		if (!ResultStatus.SUCCEEDED.equals(status)) {
 			this.content = Optional.empty();
 		}
 		return this;
@@ -22,7 +28,7 @@ public class ResultBuilder<R> implements Builder<ResultImpl<R>> {
 
 	public ResultBuilder<R> withContent(Optional<R> content) {
 		this.content = Objects.requireNonNull(content);
-		if(content.isPresent()) {
+		if (content.isPresent()) {
 			this.resultStatus = ResultStatus.SUCCEEDED;
 		}
 		return this;

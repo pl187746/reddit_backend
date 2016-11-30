@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data.builders;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +12,10 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.utils.ImmutableListBuilder;
 public class PageBuilder<C> implements Builder<PageImpl<C>> {
 
 	private ImmutableListBuilder<C> contentBuilder = new ImmutableListBuilder<>();
+
+	public PageBuilder() {
+		checkInvocation();
+	}
 
 	public PageBuilder<C> withContent(List<C> content) {
 		contentBuilder.withEditableList(content);

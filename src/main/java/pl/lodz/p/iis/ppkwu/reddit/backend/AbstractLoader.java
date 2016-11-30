@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +26,7 @@ public abstract class AbstractLoader<R, B extends Builder<R>> {
 		super();
 		this.url = url;
 		this.contentBuilder = contentBuilder;
+		checkInvocation();
 	}
 
 	public Result<R> load() {

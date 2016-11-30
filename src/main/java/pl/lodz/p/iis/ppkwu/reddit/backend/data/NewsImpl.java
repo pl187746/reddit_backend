@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
@@ -16,6 +18,7 @@ public class NewsImpl implements News {
 		this.title = Objects.requireNonNull(title, "title");
 		this.author = Objects.requireNonNull(author, "author");
 		this.thumbnailUrl = Objects.requireNonNull(thumbnailUrl, "thumbnailUrl");
+		checkInvocation();
 	}
 
 	@Override

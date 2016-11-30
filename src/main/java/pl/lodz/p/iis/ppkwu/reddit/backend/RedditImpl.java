@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -24,12 +26,15 @@ public class RedditImpl implements Reddit {
 	public RedditImpl(RedditWorker worker, Executor workerExecutor) {
 		this.worker = Objects.requireNonNull(worker, "worker");
 		this.workerExecutor = Objects.requireNonNull(workerExecutor, "workerExecutor");
+		checkInvocation();
 	}
 
 	@Override
 	public void loadCategoriesList(Callback<List<Category>> callback) throws NullPointerException {
 		Objects.requireNonNull(callback, "callback");
-		workerExecutor.execute(() -> { worker.loadCategoriesList(callback); });
+		workerExecutor.execute(() -> {
+			worker.loadCategoriesList(callback);
+		});
 	}
 
 	@Override
@@ -38,21 +43,27 @@ public class RedditImpl implements Reddit {
 		Objects.requireNonNull(subreddit, "subreddit");
 		Objects.requireNonNull(category, "category");
 		Objects.requireNonNull(callback, "callback");
-		workerExecutor.execute(() -> { worker.loadSubredditNews(subreddit, category, callback); });
+		workerExecutor.execute(() -> {
+			worker.loadSubredditNews(subreddit, category, callback);
+		});
 	}
 
 	@Override
 	public void loadUserNews(User user, Callback<Page<News>> callback) throws NullPointerException {
 		Objects.requireNonNull(user, "user");
 		Objects.requireNonNull(callback, "callback");
-		workerExecutor.execute(() -> { worker.loadUserNews(user, callback); });
+		workerExecutor.execute(() -> {
+			worker.loadUserNews(user, callback);
+		});
 	}
 
 	@Override
 	public void loadNewsByKeywords(List<String> keywords, Callback<Page<News>> callback) throws NullPointerException {
 		Objects.requireNonNull(keywords, "keywords");
 		Objects.requireNonNull(callback, "callback");
-		workerExecutor.execute(() -> { worker.loadNewsByKeywords(keywords, callback); });
+		workerExecutor.execute(() -> {
+			worker.loadNewsByKeywords(keywords, callback);
+		});
 	}
 
 	@Override

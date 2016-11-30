@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
@@ -21,6 +23,7 @@ public class NewsLoader extends AbstractLoader<PageImpl<News>, PageBuilder<News>
 
 	public NewsLoader(URL url) {
 		super(url, new PageBuilder<News>());
+		checkInvocation();
 	}
 
 	protected void extract(Document document) throws StatusException {

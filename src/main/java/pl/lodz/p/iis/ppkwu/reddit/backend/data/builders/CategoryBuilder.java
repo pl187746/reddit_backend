@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data.builders;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.util.Objects;
 
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.CategoryImpl;
@@ -9,6 +11,10 @@ public class CategoryBuilder implements Builder<CategoryImpl> {
 
 	private String name = "";
 	private String relativeUrl = "";
+
+	public CategoryBuilder() {
+		checkInvocation();
+	}
 
 	public CategoryBuilder withName(String name) {
 		this.name = Objects.requireNonNull(name);

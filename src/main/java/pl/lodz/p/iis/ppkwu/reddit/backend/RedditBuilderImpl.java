@@ -13,14 +13,13 @@ public class RedditBuilderImpl implements RedditBuilder, Builder<RedditImpl> {
 	private Executor callbackExecutor;
 	private Executor workerExecutor;
 
+	public RedditBuilderImpl() {
+	}
+
 	@Override
 	public RedditImpl build() {
-		Executor workerExecutor = Optional
-				.ofNullable(this.workerExecutor)
-				.orElseGet(Executors::newCachedThreadPool);
-		Executor callbackExecutor = Optional
-				.ofNullable(this.callbackExecutor)
-				.orElseGet(SameThreadExecutor::get);
+		Executor workerExecutor = Optional.ofNullable(this.workerExecutor).orElseGet(Executors::newCachedThreadPool);
+		Executor callbackExecutor = Optional.ofNullable(this.callbackExecutor).orElseGet(SameThreadExecutor::get);
 		RedditWorker worker = new RedditWorker(callbackExecutor);
 		return new RedditImpl(worker, workerExecutor);
 	}

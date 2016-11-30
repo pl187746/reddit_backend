@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.net.URL;
 import java.util.List;
 
@@ -22,47 +24,47 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 
 	protected CategoryLoader(URL url) {
 		super(url, new ImmutableListBuilder<>());
+		checkInvocation();
 	}
 
 	@Override
 	protected void extract(Document document) throws StatusException {
 		Elements categories = getCategoriesFromDocument(document);
-		
-		if(null != categories) {
-			for(Element categoryElement : categories) {
-				
+
+		if (null != categories) {
+			for (Element categoryElement : categories) {
+
 				CategoryBuilder categoryBuilder = new CategoryBuilder();
 				String url = getURL(categoryElement);
-				
+
 				String categoryName = "";
 				boolean validCategory = true;
-				
+
 				String[] parts = url.split("//");
 				String[] subparts = parts[1].split("/");
-				
+
 				int subpartsLength = subparts.length;
-				
-				switch(subpartsLength){
+
+				switch (subpartsLength) {
 				case 1:
 					categoryName = HOT_CATEGORY;
 					break;
 				case 2:
-					categoryName = subparts[subpartsLength-1];
+					categoryName = subparts[subpartsLength - 1];
 					validCategory = isValidCategory(categoryName);
 					break;
 				}
-				
-				if(subpartsLength > 2) {
-					if(subparts[3].isEmpty()){
-						categoryName = HOT_CATEGORY;	
-					}
-					else {
+
+				if (subpartsLength > 2) {
+					if (subparts[3].isEmpty()) {
+						categoryName = HOT_CATEGORY;
+					} else {
 						categoryName = subparts[3];
 						validCategory = isValidCategory(categoryName);
 					}
 				}
-				
-				if(validCategory){
+
+				if (validCategory) {
 					String relativeUrl = getRelativeUrl(subparts, subpartsLength);
 					categoryBuilder.withName(categoryName).withRelativeUrl(relativeUrl);
 					contentBuilder.addEntry(categoryBuilder.build());
@@ -73,14 +75,15 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 
 	private String getRelativeUrl(String[] subparts, int subpartsLength) {
 		String relativeUrl = "/";
-		for(int i = 1; i < subpartsLength; i++){
+		for (int i = 1; i < subpartsLength; i++) {
 			relativeUrl = relativeUrl + subparts[i] + "/";
 		}
 		return relativeUrl;
 	}
 
 	private boolean isValidCategory(String categoryName) {
-		return !GILDED_CATEGORY.equals(categoryName) && !WIKI_CATEGORY.equals(categoryName) && !PROMOTED_CATEGORY.equals(categoryName);
+		return !GILDED_CATEGORY.equals(categoryName) && !WIKI_CATEGORY.equals(categoryName)
+				&& !PROMOTED_CATEGORY.equals(categoryName);
 	}
 
 	private String getURL(Element categoryElement) throws StatusException {

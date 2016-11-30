@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data.builders;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,6 +15,10 @@ public class NewsBuilder implements Builder<NewsImpl> {
 	private String title;
 	private UserImpl author;
 	private Optional<URL> thumbnailUrl = Optional.empty();
+
+	public NewsBuilder() {
+		checkInvocation();
+	}
 
 	public NewsBuilder withTitle(String title) {
 		this.title = Objects.requireNonNull(title);

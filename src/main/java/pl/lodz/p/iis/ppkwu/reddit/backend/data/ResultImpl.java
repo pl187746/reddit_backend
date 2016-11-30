@@ -1,5 +1,7 @@
 package pl.lodz.p.iis.ppkwu.reddit.backend.data;
 
+import static pl.lodz.p.iis.ppkwu.reddit.backend.utils.InvocationChecker.checkInvocation;
+
 import java.util.Objects;
 import java.util.Optional;
 
@@ -15,6 +17,7 @@ public class ResultImpl<R> implements Result<R> {
 		this.resultStatus = Objects.requireNonNull(resultStatus, "resultStatus");
 		this.content = Objects.requireNonNull(content, "content");
 		assert succeeded() == content.isPresent();
+		checkInvocation();
 	}
 
 	@Override
