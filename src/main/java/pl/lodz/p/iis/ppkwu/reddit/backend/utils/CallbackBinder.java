@@ -17,7 +17,11 @@ public class CallbackBinder<R> implements Runnable {
 
 	@Override
 	public void run() {
-		callback.finished(result);
+		try {
+			callback.finished(result);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	public Callback<R> getCallback() {
