@@ -24,7 +24,7 @@ public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableList
 		NON_CATEGORY_URLS.add("gilded");
 	}
 
-	protected CategoryLoader() {
+	public CategoryLoader() {
 		super(UrlGenerator.baseUrl(), new ImmutableListBuilder<>());
 		checkInvocation();
 	}
