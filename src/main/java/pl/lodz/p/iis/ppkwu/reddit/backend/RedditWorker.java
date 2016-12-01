@@ -71,8 +71,12 @@ public class RedditWorker {
 	}
 
 	private <R> void runCallback(Callback<R> callback, Result<R> result) {
-		CallbackBinder<R> binding = new CallbackBinder<>(callback, result);
-		callbackExecutor.execute(binding);
+		try {
+			CallbackBinder<R> binding = new CallbackBinder<>(callback, result);
+			callbackExecutor.execute(binding);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }
