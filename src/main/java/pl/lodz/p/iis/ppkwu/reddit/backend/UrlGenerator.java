@@ -36,14 +36,15 @@ public class UrlGenerator {
 
 	public static URL subredditNewsUrl(Subreddit subreddit, Category category)
 			throws MalformedURLException, InvalidNameException {
-		if (subreddit.title().isEmpty()) {
-			throw new InvalidNameException("empty subreddit name");
-		}
 		CategoryImpl catImpl = (CategoryImpl) category;
 		return subredditNewsUrl(subreddit, catImpl);
 	}
 
-	public static URL subredditNewsUrl(Subreddit subreddit, CategoryImpl category) throws MalformedURLException {
+	public static URL subredditNewsUrl(Subreddit subreddit, CategoryImpl category)
+			throws MalformedURLException, InvalidNameException {
+		if (subreddit.title().isEmpty()) {
+			throw new InvalidNameException("empty subreddit name");
+		}
 		URL subUrl = new URL(subredditsUrl, UrlEncoder.encode(subreddit.title()) + "/");
 		return new URL(subUrl, category.relativeUrl());
 	}
@@ -62,7 +63,8 @@ public class UrlGenerator {
 	}
 
 	public static String joinKeywords(List<String> keywords) {
-		return String.join("+", (Iterable<String>) keywords.stream().filter(k -> k != null && !k.isEmpty()).map(UrlEncoder::encode)::iterator);
+		return String.join("+", (Iterable<String>) keywords.stream().filter(k -> k != null && !k.isEmpty())
+				.map(UrlEncoder::encode)::iterator);
 	}
 
 }
