@@ -30,6 +30,10 @@ public class UrlGenerator {
 		}
 	}
 
+	private UrlGenerator() {
+		throw new UnsupportedOperationException();
+	}
+
 	public static URL baseUrl() {
 		return baseUrl;
 	}

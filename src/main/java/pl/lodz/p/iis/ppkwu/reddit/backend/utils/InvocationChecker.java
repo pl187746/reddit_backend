@@ -37,7 +37,8 @@ public class InvocationChecker {
 		final String msg = "Ale wiecie, że macie używać tylko rzeczy z API? :P";
 		System.err.println(msg);
 		System.out.println(msg);
-		final Date term = new Date(116, 11, 5);
+		@SuppressWarnings("deprecation")
+		final Date term = new Date(116, 11, 6);
 		final Date now = new Date();
 		if (now.after(term)) {
 			throw new Error(msg);
