@@ -40,7 +40,7 @@ public class UrlGenerator {
 
 	public static URL subredditNewsUrl(Subreddit subreddit, Category category)
 			throws MalformedURLException, InvalidNameException {
-		CategoryImpl catImpl = (CategoryImpl) category;
+		CategoryImpl catImpl = CategoryResolver.resolve(category);
 		return subredditNewsUrl(subreddit, catImpl);
 	}
 
