@@ -67,8 +67,10 @@ public class UrlGenerator {
 	}
 
 	static String joinKeywords(List<String> keywords) {
-		return String.join("+", (Iterable<String>) keywords.stream().filter(k -> k != null && !k.isEmpty())
-				.map(UrlEncoder::encode)::iterator);
+		StringBuilder builder = new StringBuilder();
+		keywords.stream().filter(k -> k != null && !k.isEmpty()).forEachOrdered(k -> { UrlEncoder.encode(k, builder); builder.append('+'); });
+		builder.deleteCharAt(builder.length() - 1);
+		return builder.toString();
 	}
 
 }
