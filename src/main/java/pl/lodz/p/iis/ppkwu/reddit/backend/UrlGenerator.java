@@ -68,8 +68,13 @@ public class UrlGenerator {
 
 	static String joinKeywords(List<String> keywords) {
 		StringBuilder builder = new StringBuilder();
-		keywords.stream().filter(k -> k != null && !k.isEmpty()).forEachOrdered(k -> { UrlEncoder.encode(k, builder); builder.append('+'); });
-		builder.deleteCharAt(builder.length() - 1);
+		keywords.stream().filter(k -> k != null && !k.isEmpty()).forEachOrdered(k -> {
+			UrlEncoder.encode(k, builder);
+			builder.append('+');
+		});
+		if (builder.length() > 0) {
+			builder.deleteCharAt(builder.length() - 1);
+		}
 		return builder.toString();
 	}
 
