@@ -17,7 +17,7 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
 public class UrlGeneratorTest {
 
 	@Test
-	public void subredditIKategoria() throws MalformedURLException {
+	public void subredditIKategoria() throws Exception {
 		URL url = UrlGenerator.subredditNewsUrl(new SubredditImpl("pics"), new CategoryImpl("", "top"));
 		assertThat(url, equalTo(new URL(UrlGenerator.baseUrl(), "/r/pics/top")));
 	}
