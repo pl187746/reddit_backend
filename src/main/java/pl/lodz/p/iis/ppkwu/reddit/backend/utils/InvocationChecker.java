@@ -22,7 +22,7 @@ public class InvocationChecker {
 				return;
 			}
 		}
-		illegalInvocation();
+		illegalInvocation(callerOfCaller);
 	}
 
 	private static StackTraceElement[] getStackTrace() {
@@ -33,8 +33,8 @@ public class InvocationChecker {
 		}
 	}
 
-	private static void illegalInvocation() {
-		final String msg = "Ale wiecie, że macie używać tylko rzeczy z API? :P";
+	private static void illegalInvocation(StackTraceElement caller) {
+		final String msg = "Ale wiecie, że macie używać tylko rzeczy z API? :P " + caller.toString();
 		System.err.println(msg);
 		System.out.println(msg);
 		@SuppressWarnings("deprecation")
