@@ -44,12 +44,13 @@ public class UrlGenerator {
 		return subredditNewsUrl(subreddit, catImpl);
 	}
 
-	static URL subredditNewsUrl(Subreddit subreddit, CategoryImpl category)
-			throws MalformedURLException, InvalidNameException {
+	static URL subredditNewsUrl(Subreddit subreddit, CategoryImpl category) throws MalformedURLException {
+		URL subUrl;
 		if (subreddit.title().isEmpty()) {
-			throw new InvalidNameException("empty subreddit name");
+			subUrl = baseUrl;
+		} else {
+			subUrl = new URL(subredditsUrl, UrlEncoder.encode(subreddit.title()) + "/");
 		}
-		URL subUrl = new URL(subredditsUrl, UrlEncoder.encode(subreddit.title()) + "/");
 		return new URL(subUrl, category.relativeUrl());
 	}
 
