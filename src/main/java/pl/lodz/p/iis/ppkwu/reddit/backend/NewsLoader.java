@@ -49,7 +49,7 @@ class NewsLoader extends AbstractLoader<Page<News>, PageBuilder<News>> {
 	}
 
 	private Elements getNewsFromDocument(Document document) {
-		return document.select("div.thing, div.search-result-link");
+		return document.select("div.link, div.search-result-link");
 	}
 
 	private Optional<URL> getThumbnailUrl(Element newsElement) {
