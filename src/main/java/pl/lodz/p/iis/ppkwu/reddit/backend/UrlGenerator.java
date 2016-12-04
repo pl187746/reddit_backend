@@ -21,7 +21,7 @@ public class UrlGenerator {
 
 	static {
 		try {
-			baseUrl = new URL("https://reddit.com/");
+			baseUrl = new URL("https://www.reddit.com/");
 			subredditsUrl = new URL(baseUrl, "r/");
 			usersUrl = new URL(baseUrl, "user/");
 		} catch (MalformedURLException e) {
