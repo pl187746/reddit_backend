@@ -19,14 +19,15 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.PageBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.UserBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 
-public class NewsLoader extends AbstractLoader<Page<News>, PageBuilder<News>> {
+class NewsLoader extends AbstractLoader<Page<News>, PageBuilder<News>> {
 
-	public NewsLoader(URL url) {
+	NewsLoader(URL url) {
 		super(url, new PageBuilder<News>());
 		checkInvocation();
 	}
 
-	protected void extract(Document document) throws StatusException {
+	@Override
+	void extract(Document document) throws StatusException {
 		Elements news = getNewsFromDocument(document);
 		if (null != news)
 			for (Element newsElement : news) {

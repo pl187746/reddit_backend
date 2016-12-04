@@ -33,7 +33,7 @@ public class RedditBuilderImpl implements RedditBuilder, Builder<RedditImpl> {
 		return this;
 	}
 
-	public RedditBuilderImpl withWorkerExecutor(Executor workerExecutor) {
+	RedditBuilderImpl withWorkerExecutor(Executor workerExecutor) {
 		checkInvocation();
 		this.workerExecutor = workerExecutor;
 		return this;

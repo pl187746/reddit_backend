@@ -16,22 +16,22 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.CategoryBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.ImmutableListBuilder;
 
-public class CategoryLoader extends AbstractLoader<List<Category>, ImmutableListBuilder<Category>> {
+class CategoryLoader extends AbstractLoader<List<Category>, ImmutableListBuilder<Category>> {
 
-	private static Set<String> NON_CATEGORY_URLS = new HashSet<>();
+	private static final Set<String> NON_CATEGORY_URLS = new HashSet<>();
 
 	static {
 		NON_CATEGORY_URLS.add("wiki");
 		NON_CATEGORY_URLS.add("gilded");
 	}
 
-	public CategoryLoader() {
+	CategoryLoader() {
 		super(UrlGenerator.baseUrl(), new ImmutableListBuilder<>());
 		checkInvocation();
 	}
 
 	@Override
-	protected void extract(Document document) throws StatusException {
+	void extract(Document document) throws StatusException {
 		Elements categories = getCategoriesFromDocument(document);
 
 		if (categories == null || categories.isEmpty()) {

@@ -16,20 +16,20 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.StatusException;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Builder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.Downloader;
 
-public abstract class AbstractLoader<R, B extends Builder<? extends R>> {
+abstract class AbstractLoader<R, B extends Builder<? extends R>> {
 
 	protected URL url;
 	protected B contentBuilder;
 	private ResultStatus resultStatus = ResultStatus.SUCCEEDED;
 
-	protected AbstractLoader(URL url, B contentBuilder) {
+	AbstractLoader(URL url, B contentBuilder) {
 		super();
 		this.url = url;
 		this.contentBuilder = contentBuilder;
 		checkInvocation();
 	}
 
-	public Result<R> load() {
+	Result<R> load() {
 		try {
 			perform();
 		} catch (StatusException se) {
@@ -38,7 +38,7 @@ public abstract class AbstractLoader<R, B extends Builder<? extends R>> {
 		return getResult();
 	}
 
-	public Result<R> getResult() {
+	Result<R> getResult() {
 		return new ResultBuilder<R>().withContent(contentBuilder.build()).withStatus(resultStatus).build();
 	}
 
@@ -64,6 +64,6 @@ public abstract class AbstractLoader<R, B extends Builder<? extends R>> {
 		}
 	}
 
-	protected abstract void extract(Document document) throws StatusException;
+	abstract void extract(Document document) throws StatusException;
 
 }

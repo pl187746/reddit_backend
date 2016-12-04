@@ -19,38 +19,38 @@ import pl.lodz.p.iis.ppkwu.reddit.api.User;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.ResultBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.utils.CallbackBinder;
 
-public class RedditWorker {
+class RedditWorker {
 
 	private Executor callbackExecutor;
 
-	public RedditWorker(Executor callbackExecutor) {
+	RedditWorker(Executor callbackExecutor) {
 		Objects.requireNonNull(callbackExecutor, "callbackExecutor");
 		this.callbackExecutor = callbackExecutor;
 		checkInvocation();
 	}
 
-	public void loadCategoriesList(Callback<List<Category>> callback) {
+	void loadCategoriesList(Callback<List<Category>> callback) {
 		CategoryLoader categoryLoader = new CategoryLoader();
 		Result<List<Category>> result = categoryLoader.load();
 		runCallback(callback, result);
 	}
 
-	public void loadSubredditNews(Subreddit subreddit, Category category, Callback<Page<News>> callback) {
+	void loadSubredditNews(Subreddit subreddit, Category category, Callback<Page<News>> callback) {
 		Callable<URL> callUrl = () -> UrlGenerator.subredditNewsUrl(subreddit, category);
 		loadNewsFromUrl(callUrl, callback);
 	}
 
-	public void loadUserNews(User user, Callback<Page<News>> callback) {
+	void loadUserNews(User user, Callback<Page<News>> callback) {
 		Callable<URL> callUrl = () -> UrlGenerator.userNewsUrl(user);
 		loadNewsFromUrl(callUrl, callback);
 	}
 
-	public void loadNewsByKeywords(List<String> keywords, Callback<Page<News>> callback) {
+	void loadNewsByKeywords(List<String> keywords, Callback<Page<News>> callback) {
 		Callable<URL> callUrl = () -> UrlGenerator.newsByKeywordsUrl(keywords);
 		loadNewsFromUrl(callUrl, callback);
 	}
 
-	public void loadNewsFromUrl(Callable<URL> callUrl, Callback<Page<News>> callback) {
+	void loadNewsFromUrl(Callable<URL> callUrl, Callback<Page<News>> callback) {
 		try {
 			URL url = callUrl.call();
 			loadNewsFromUrl(url, callback);
@@ -59,7 +59,7 @@ public class RedditWorker {
 		}
 	}
 
-	public void loadNewsFromUrl(URL url, Callback<Page<News>> callback) {
+	void loadNewsFromUrl(URL url, Callback<Page<News>> callback) {
 		NewsLoader newsLoader = new NewsLoader(url);
 		Result<Page<News>> result = newsLoader.load();
 		runCallback(callback, result);

@@ -38,13 +38,13 @@ public class UrlGenerator {
 		return baseUrl;
 	}
 
-	public static URL subredditNewsUrl(Subreddit subreddit, Category category)
+	static URL subredditNewsUrl(Subreddit subreddit, Category category)
 			throws MalformedURLException, InvalidNameException {
 		CategoryImpl catImpl = CategoryResolver.resolve(category);
 		return subredditNewsUrl(subreddit, catImpl);
 	}
 
-	public static URL subredditNewsUrl(Subreddit subreddit, CategoryImpl category)
+	static URL subredditNewsUrl(Subreddit subreddit, CategoryImpl category)
 			throws MalformedURLException, InvalidNameException {
 		if (subreddit.title().isEmpty()) {
 			throw new InvalidNameException("empty subreddit name");
@@ -53,20 +53,20 @@ public class UrlGenerator {
 		return new URL(subUrl, category.relativeUrl());
 	}
 
-	public static URL userNewsUrl(User user) throws MalformedURLException, InvalidNameException {
+	static URL userNewsUrl(User user) throws MalformedURLException, InvalidNameException {
 		if (user.login().isEmpty()) {
 			throw new InvalidNameException("empty user name");
 		}
 		return new URL(usersUrl, UrlEncoder.encode(user.login()) + userSubmittedUrlSuffix);
 	}
 
-	public static URL newsByKeywordsUrl(List<String> keywords) throws MalformedURLException {
+	static URL newsByKeywordsUrl(List<String> keywords) throws MalformedURLException {
 		String joinedKeywords = joinKeywords(keywords);
 		String query = searchPrefix + joinedKeywords;
 		return new URL(baseUrl, query);
 	}
 
-	public static String joinKeywords(List<String> keywords) {
+	static String joinKeywords(List<String> keywords) {
 		return String.join("+", (Iterable<String>) keywords.stream().filter(k -> k != null && !k.isEmpty())
 				.map(UrlEncoder::encode)::iterator);
 	}

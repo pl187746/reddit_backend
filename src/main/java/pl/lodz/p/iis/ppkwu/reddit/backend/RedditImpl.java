@@ -18,12 +18,12 @@ import pl.lodz.p.iis.ppkwu.reddit.backend.data.UserImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.SubredditBuilder;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.UserBuilder;
 
-public class RedditImpl implements Reddit {
+class RedditImpl implements Reddit {
 
 	private RedditWorker worker;
 	private Executor workerExecutor;
 
-	public RedditImpl(RedditWorker worker, Executor workerExecutor) {
+	RedditImpl(RedditWorker worker, Executor workerExecutor) {
 		this.worker = Objects.requireNonNull(worker, "worker");
 		this.workerExecutor = Objects.requireNonNull(workerExecutor, "workerExecutor");
 		checkInvocation();

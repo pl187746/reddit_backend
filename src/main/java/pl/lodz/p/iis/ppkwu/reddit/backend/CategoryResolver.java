@@ -11,13 +11,13 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.CategoryImpl;
 import pl.lodz.p.iis.ppkwu.reddit.backend.exceptions.InvalidNameException;
 
-public class CategoryResolver {
+class CategoryResolver {
 
 	private CategoryResolver() {
 		throw new UnsupportedOperationException();
 	}
 
-	public static CategoryImpl resolve(Category category) throws InvalidNameException {
+	static CategoryImpl resolve(Category category) throws InvalidNameException {
 		Objects.requireNonNull(category);
 		checkInvocation();
 		if (category instanceof CategoryImpl) {
@@ -27,7 +27,7 @@ public class CategoryResolver {
 		}
 	}
 
-	public static CategoryImpl findByName(String name) throws InvalidNameException {
+	static CategoryImpl findByName(String name) throws InvalidNameException {
 		Objects.requireNonNull(name);
 		checkInvocation();
 		List<Category> list = getCategoriesList();
